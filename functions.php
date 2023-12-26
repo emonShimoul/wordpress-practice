@@ -24,6 +24,12 @@ function emon_css_and_js_files_loading() {
 }
 add_action( 'wp_enqueue_scripts', 'emon_css_and_js_files_loading' );
 
+// Google Fonts Enqueue
+function emon_add_google_fonts(){
+    wp_enqueue_style( 'emon_google_fonts', 'https://fonts.googleapis.com/css2?family=Kaisei+Decol&family=Oswald&display=swap', false);
+}
+add_action( 'wp_enqueue_style', 'emon_add_google_fonts' );
+
 // Theme Function
 function emon_customizer_register($wp_customize){
     $wp_customize->add_section('emon_header_area', array(
@@ -44,3 +50,6 @@ function emon_customizer_register($wp_customize){
 }
 
 add_action( 'customize_register','emon_customizer_register' );
+
+// Menu Register
+register_nav_menu( 'main_menu', __('Main Menu', 'emonshimoul') );
