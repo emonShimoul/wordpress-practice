@@ -23,3 +23,24 @@ function emon_css_and_js_files_loading() {
     wp_enqueue_script('main', get_template_directory_uri().'/js/main.js', array(), '1.0.0', true);
 }
 add_action( 'wp_enqueue_scripts', 'emon_css_and_js_files_loading' );
+
+// Theme Function
+function emon_customizer_register($wp_customize){
+    $wp_customize->add_section('emon_header_area', array(
+        'title' => __('Header Area', 'emonshimoul'),
+        'description' => 'If you are interested to update your header area, you can do it here.'
+    ));
+
+    $wp_customize->add_setting('emon_logo', array(
+        'default' => get_bloginfo('template_directory') . '/img/logo.png',
+    ));
+
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'emon_logo', array(
+        'label' => 'Logo Upload',
+        'description' => 'If you are interested to change or update your header area, you can do it here.',
+        'setting' => 'emon_logo',
+        'section' => 'emon_header_area',
+    ) ));
+}
+
+add_action( 'customize_register','emon_customizer_register' );
